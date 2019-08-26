@@ -9,16 +9,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/usuario")
 public class UsuarioController {
 
     @Autowired
     private UsuarioDAO dao;
-    private UsuarioBO pacienteBO = new UsuarioBO();
+    private UsuarioBO usuarioBO = new UsuarioBO();
 
     @PostMapping("/inserir")
     public String inserir(@RequestBody Usuario u) {
-        return pacienteBO.inserir(u, dao);
+        return usuarioBO.inserir(u, dao);
     }
+
+    @PostMapping("/getNome")
+    public List<Usuario> getNome(@RequestBody Usuario p) { return usuarioBO.getUsuarioNOME(p, dao); }
 }

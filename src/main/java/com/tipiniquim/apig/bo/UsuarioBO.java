@@ -6,6 +6,7 @@ import com.tipiniquim.apig.dao.UsuarioDAO;
 import com.tipiniquim.apig.modelo.Usuario;
 
 import javax.validation.ConstraintViolationException;
+import java.util.List;
 
 public class UsuarioBO {
 
@@ -31,5 +32,10 @@ public class UsuarioBO {
         }
 
         return UsuarioResponse.ERRO_INVALIDO;
+    }
+
+    public List<Usuario> getUsuarioNOME(Usuario u, UsuarioDAO dao) {
+        List<Usuario> u2 = dao.getUsuarioNOME(u.getNome());
+        return u2;
     }
 }
