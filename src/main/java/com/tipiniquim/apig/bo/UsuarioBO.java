@@ -43,8 +43,4 @@ public class UsuarioBO {
     public List<Usuario> getUsuarioNOME(Usuario u) {
         return usuarioDao.getUsuarioNOME(u.getNome());
     }
-    
-    public void setUsuarioDao(UsuarioDAO usuarioDao) {
-        this.usuarioDao = usuarioDao;
-    }
 }
