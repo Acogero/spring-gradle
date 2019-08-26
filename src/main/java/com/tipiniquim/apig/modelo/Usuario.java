@@ -3,6 +3,7 @@ package com.tipiniquim.apig.modelo;
 import com.tipiniquim.apig.Util.NotNullUsuario;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.sql.Blob;
 
@@ -36,13 +37,20 @@ public class Usuario {
     private String tipo;
 
     @Column(name = "sexo")
+    @NotEmpty
     private String sexo;
+
     @Column(name = "foto")
     private Blob foto;
+
     @Column(name = "telefoneF")
+    @NotEmpty
     private String telefoneF;
+
     @Column(name = "nome_convenio")
+    @NotEmpty
     private String nome_convenio;
+
     @Column(name = "num_plano")
     private String num_plano;
 
