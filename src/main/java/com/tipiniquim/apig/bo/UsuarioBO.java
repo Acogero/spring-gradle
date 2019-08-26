@@ -4,16 +4,19 @@ import com.tipiniquim.apig.Util.ServerUtil;
 import com.tipiniquim.apig.Util.UsuarioResponse;
 import com.tipiniquim.apig.dao.UsuarioDAO;
 import com.tipiniquim.apig.modelo.Usuario;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.validation.ConstraintViolationException;
 import java.util.List;
 
+@Service
 public class UsuarioBO {
     
     @Autowired
     private UsuarioDAO usuarioDao;
-    
-    public String inserir(Usuario u, UsuarioDAO dao) {
+
+    public String inserir(Usuario u) {
         Usuario p2 = usuarioDao.existeUsuario(u.getEmail());
 
         if (p2 != null) {
@@ -23,7 +26,7 @@ public class UsuarioBO {
             try {
                 usuarioDao.save(u);
             } catch(ConstraintViolationException e) {
-                ServerUtil.retornoViolacao(e);
+                return ServerUtil.retornoViolacao(e);
             }
 
             p2 = usuarioDao.existeUsuario(u.getEmail());
@@ -37,9 +40,8 @@ public class UsuarioBO {
         return UsuarioResponse.ERRO_INVALIDO;
     }
 
-    public List<Usuario> getUsuarioNOME(Usuario u, UsuarioDAO dao) {
-        List<Usuario> u2 = dao.getUsuarioNOME(u.getNome());
-        return u2;
+    public List<Usuario> getUsuarioNOME(Usuario u) {
+        return usuarioDao.getUsuarioNOME(u.getNome());
     }
     
     public void setUsuarioDao(UsuarioDAO usuarioDao) {

@@ -16,14 +16,13 @@ import java.util.List;
 public class UsuarioController {
 
     @Autowired
-    private UsuarioDAO dao;
-    private UsuarioBO usuarioBO = new UsuarioBO();
+    private UsuarioBO usuarioBO;
 
     @PostMapping("/inserir")
     public String inserir(@RequestBody Usuario u) {
-        return usuarioBO.inserir(u, dao);
+        return usuarioBO.inserir(u);
     }
 
     @PostMapping("/getNome")
-    public List<Usuario> getNome(@RequestBody Usuario p) { return usuarioBO.getUsuarioNOME(p, dao); }
+    public List<Usuario> getNome(@RequestBody Usuario p) { return usuarioBO.getUsuarioNOME(p); }
 }
