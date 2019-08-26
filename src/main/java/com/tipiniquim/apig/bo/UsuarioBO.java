@@ -9,21 +9,24 @@ import javax.validation.ConstraintViolationException;
 import java.util.List;
 
 public class UsuarioBO {
-
+    
+    @Autowired
+    private UsuarioDAO usuarioDao;
+    
     public String inserir(Usuario u, UsuarioDAO dao) {
-        Usuario p2 = dao.existeUsuario(u.getEmail());
+        Usuario p2 = usuarioDao.existeUsuario(u.getEmail());
 
         if (p2 != null) {
             if (u.equals(p2))
                 return UsuarioResponse.USER_FOUND;
         } else {
             try {
-                dao.save(u);
+                usuarioDao.save(u);
             } catch(ConstraintViolationException e) {
                 ServerUtil.retornoViolacao(e);
             }
 
-            p2 = dao.existeUsuario(u.getEmail());
+            p2 = usuarioDao.existeUsuario(u.getEmail());
 
             if (p2.getEmail().equals(u.getEmail()))
                 return UsuarioResponse.USER_CREATED;
@@ -37,5 +40,9 @@ public class UsuarioBO {
     public List<Usuario> getUsuarioNOME(Usuario u, UsuarioDAO dao) {
         List<Usuario> u2 = dao.getUsuarioNOME(u.getNome());
         return u2;
+    }
+    
+    public void setUsuarioDao(UsuarioDAO usuarioDao) {
+        this.usuarioDao = usuarioDao;
     }
 }
